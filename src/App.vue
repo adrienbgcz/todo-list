@@ -1,49 +1,61 @@
 <template>
   <div id="app">
-    <input-test @getTask="addTask" />
+    <layout>
+      <template #header="slotProps">
+      {{slotProps.appName}}
+      </template>
 
-    <div v-for="(task, index) in tasksList" :key="task.taskName" class="tasksList" >
-      <div :class="{true:task.checked}">{{task.taskName}}</div>
-      <input type="checkbox" id="checkbox" v-model="task.checked" >
-      <button-test label="Supprimer" @action="deleteTask(index)"/>
-    </div>
-    
+      <template #main>
+        <input-test @getTask="addTask" />
+
+        <div v-for="(task, index) in tasksList" :key="`${task.taskName}${index}`" class="tasksList">
+          <div :class="{ true: task.checked }">{{ task.taskName }}</div>
+          <input type="checkbox" id="checkbox" v-model="task.checked" />
+          <button-test @action="deleteTask(index)">Supprimer</button-test>
+        </div>
+      </template>
+
+      <template #footer="slotProps">
+      {{slotProps.mail}}
+      </template>
+    </layout>
   </div>
 </template>
 
 <script>
-import InputTest from "./components/inputTest.vue"
-import ButtonTest from "./components/buttonTest.vue"
+import InputTest from "./components/InputTest.vue";
+import ButtonTest from "./components/ButtonTest.vue";
+import Layout from "./components/Layout.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     InputTest,
-    ButtonTest
-  }, 
-  data: function() {
+    ButtonTest,
+    Layout,
+  },
+  data: function () {
     return {
-      tasksList: [], 
-      checked: false
-    }
+      tasksList: [],
+      checked: false,
+    };
   },
   methods: {
     addTask(taskName) {
       let task = {
         taskName: taskName,
-        checked: this.checked
-      }
-      this.tasksList.push(task)
+        checked: this.checked,
+      };
+      this.tasksList.push(task);
     },
     deleteTask(index) {
-      this.tasksList.splice(index, 1)
-    }
-  }
-}
+      this.tasksList.splice(index, 1);
+    },
+  },
+};
 </script>
 
 <style>
-
 .tasksList {
   display: flex;
 }
@@ -52,5 +64,4 @@ export default {
   color: red;
   text-decoration: line-through;
 }
-
 </style>

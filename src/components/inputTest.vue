@@ -1,15 +1,15 @@
 <template>
   <div class="inputTest">
-    <input type="text" v-model="inputValue" >
-    <button-test label="Valider" @action="getTask()"/>
+    <input type="text" v-model="inputValue" @keyup.enter="getTask" @click="cleanInput">
+    <button-test @action="getTask">Valider</button-test>
   </div>
 </template>
 
 <script>
-import ButtonTest from "./buttonTest.vue"
+import ButtonTest from "./ButtonTest.vue"
 
 export default {
-  name: 'inputTest',
+  name: 'InputTest',
   components: {
     ButtonTest
   },
@@ -21,7 +21,10 @@ export default {
   },
   methods: {
     getTask() {
-      this.$emit('getTask', this.inputValue)
+      this.$emit('getTask', this.inputValue);
+    },
+    cleanInput() {
+      this.inputValue = '';
     }
   }
 }
@@ -30,6 +33,8 @@ export default {
 <style scoped>
  .inputTest {
    display: flex;
+   margin-bottom: 50px;
+   margin-right: 20px;
  }
 
 </style>

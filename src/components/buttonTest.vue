@@ -1,6 +1,9 @@
 <template>
     <div>
-      <button @click="$emit('action')">{{label}}</button>
+      <button @click="$emit('action')">
+      <slot>Button</slot>
+
+      </button>
         
     </div>
 </template>
@@ -8,15 +11,11 @@
 
 <script>
 export default {
-  name: 'buttonTest',
-  props: {
-    label: {
-      type: String
-    }
-  },
+  name: 'ButtonTest',
+  
   data: function () {
     return {
-      buttonLabel: this.label
+      
     }
   }
 }
