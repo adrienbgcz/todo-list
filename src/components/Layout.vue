@@ -5,7 +5,7 @@
     </header>
 
     <main class="main">
-        <slot name="main"></slot>
+        <slot></slot>
     </main>
 
     <footer class="footer">
@@ -24,8 +24,6 @@ export default {
         }
     }
 }
-
-
 
 
 </script>

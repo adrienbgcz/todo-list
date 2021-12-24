@@ -1,7 +1,7 @@
 <template>
   <div class="inputTest">
     <input type="text" v-model="inputValue" @keyup.enter="getTask" @click="cleanInput">
-    <button-test @action="getTask">Valider</button-test>
+    <button-test @click="getTask">Valider</button-test>
   </div>
 </template>
 
